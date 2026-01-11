@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Stripe;
+using StripeApiWrapper.Services;
 
 namespace StripeApiWrapper.Configuration;
 
@@ -64,8 +65,9 @@ public static class ServiceCollectionExtensions
                 meterEventsBase: null);
         });
 
-        // TODO: Register service implementations in future iterations
-        // services.AddScoped<IPaymentService, PaymentService>();
+        // Register service implementations
+        services.AddScoped<IPaymentService, PaymentService>();
+        // TODO: Register additional services in future iterations
         // services.AddScoped<ICustomerService, CustomerService>();
         // services.AddScoped<ISubscriptionService, SubscriptionService>();
         // services.AddScoped<IInvoiceService, InvoiceService>();
