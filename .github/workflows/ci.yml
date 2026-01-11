@@ -22,7 +22,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build
+    - name: Build library (all targets)
+      run: dotnet build src/StripeApiWrapper -c Release --no-restore
+
+    - name: Build solution
       run: dotnet build --no-restore -c Release
 
     - name: Run tests
@@ -37,3 +40,26 @@ jobs:
         name: nuget-package
         path: ./nupkg/*.nupkg
         retention-days: 30
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Build and pack
+      run: |
+        dotnet restore
+        dotnet build src/StripeApiWrapper -c Release
+        dotnet pack src/StripeApiWrapper -c Release --no-build -o ./nupkg
+
+    - name: Publish to NuGet
+      run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
