@@ -40,3 +40,8 @@ Thumbs.db
 *.env
 appsettings.Development.json
 appsettings.Local.json
+
+# Replit
+.replit.nix
+.cache/
+.upm/

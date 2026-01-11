@@ -1,0 +1,26 @@
+# Replit configuration for StripeApiWrapper
+# https://docs.replit.com/programming-ide/configuring-replit
+
+run = "dotnet run --project samples/SampleApi"
+
+entrypoint = "samples/SampleApi/Program.cs"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["dotnet", "run", "--project", "samples/SampleApi", "-c", "Release"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 443
+
+[env]
+DOTNET_CLI_HOME = "/home/runner/.dotnet"
+ASPNETCORE_ENVIRONMENT = "Development"
+ASPNETCORE_URLS = "http://0.0.0.0:5000"
