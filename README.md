@@ -33,7 +33,7 @@ builder.Services.AddStripeServices(options =>
 
 var app = builder.Build();
 
-app.UseStripeWebhooks("/webhooks/stripe");
+app.MapStripeWebhook("/webhooks/stripe");
 
 app.Run();
 ```

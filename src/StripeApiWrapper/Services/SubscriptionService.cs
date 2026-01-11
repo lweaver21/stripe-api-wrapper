@@ -2,6 +2,7 @@ using Microsoft.Extensions.Options;
 using Stripe;
 using StripeApiWrapper.Configuration;
 using StripeApiWrapper.Exceptions;
+using StripeApiWrapper.Internal;
 using StripeApiWrapper.Models;
 
 namespace StripeApiWrapper.Services;
@@ -21,8 +22,8 @@ public class SubscriptionService : ISubscriptionService
     /// <param name="options">The Stripe options.</param>
     public SubscriptionService(IStripeClient stripeClient, IOptions<StripeOptions> options)
     {
-        ArgumentNullException.ThrowIfNull(stripeClient);
-        ArgumentNullException.ThrowIfNull(options);
+        ThrowHelper.ThrowIfNull(stripeClient);
+        ThrowHelper.ThrowIfNull(options);
 
         _subscriptionService = new Stripe.SubscriptionService(stripeClient);
         _options = options.Value;
@@ -31,7 +32,7 @@ public class SubscriptionService : ISubscriptionService
     /// <inheritdoc/>
     public async Task<SubscriptionDto> CreateSubscriptionAsync(CreateSubscriptionRequest request, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(request);
+        ThrowHelper.ThrowIfNull(request);
 
         try
         {
@@ -68,7 +69,7 @@ public class SubscriptionService : ISubscriptionService
     /// <inheritdoc/>
     public async Task<SubscriptionDto> UpdateSubscriptionAsync(string subscriptionId, string? priceId = null, int? quantity = null, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subscriptionId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(subscriptionId);
 
         try
         {
@@ -107,7 +108,7 @@ public class SubscriptionService : ISubscriptionService
     /// <inheritdoc/>
     public async Task<SubscriptionDto> CancelSubscriptionAsync(string subscriptionId, bool cancelAtPeriodEnd = true, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subscriptionId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(subscriptionId);
 
         try
         {
@@ -137,7 +138,7 @@ public class SubscriptionService : ISubscriptionService
     /// <inheritdoc/>
     public async Task<SubscriptionDto> ResumeSubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subscriptionId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(subscriptionId);
 
         try
         {
@@ -159,7 +160,7 @@ public class SubscriptionService : ISubscriptionService
     /// <inheritdoc/>
     public async Task<SubscriptionDto> GetSubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subscriptionId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(subscriptionId);
 
         try
         {
@@ -176,7 +177,7 @@ public class SubscriptionService : ISubscriptionService
     /// <inheritdoc/>
     public async Task<IReadOnlyList<SubscriptionDto>> ListSubscriptionsAsync(string customerId, string? status = null, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(customerId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(customerId);
 
         try
         {

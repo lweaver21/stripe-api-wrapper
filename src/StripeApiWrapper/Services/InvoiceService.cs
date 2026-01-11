@@ -2,6 +2,7 @@ using Microsoft.Extensions.Options;
 using Stripe;
 using StripeApiWrapper.Configuration;
 using StripeApiWrapper.Exceptions;
+using StripeApiWrapper.Internal;
 using StripeApiWrapper.Models;
 
 namespace StripeApiWrapper.Services;
@@ -21,8 +22,8 @@ public class InvoiceService : IInvoiceService
     /// <param name="options">The Stripe options.</param>
     public InvoiceService(IStripeClient stripeClient, IOptions<StripeOptions> options)
     {
-        ArgumentNullException.ThrowIfNull(stripeClient);
-        ArgumentNullException.ThrowIfNull(options);
+        ThrowHelper.ThrowIfNull(stripeClient);
+        ThrowHelper.ThrowIfNull(options);
 
         _invoiceService = new Stripe.InvoiceService(stripeClient);
         _options = options.Value;
@@ -31,7 +32,7 @@ public class InvoiceService : IInvoiceService
     /// <inheritdoc/>
     public async Task<InvoiceDto> CreateInvoiceAsync(CreateInvoiceRequest request, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(request);
+        ThrowHelper.ThrowIfNull(request);
 
         try
         {
@@ -58,7 +59,7 @@ public class InvoiceService : IInvoiceService
     /// <inheritdoc/>
     public async Task<InvoiceDto> FinalizeInvoiceAsync(string invoiceId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(invoiceId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(invoiceId);
 
         try
         {
@@ -75,7 +76,7 @@ public class InvoiceService : IInvoiceService
     /// <inheritdoc/>
     public async Task<InvoiceDto> PayInvoiceAsync(string invoiceId, string? paymentMethodId = null, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(invoiceId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(invoiceId);
 
         try
         {
@@ -97,7 +98,7 @@ public class InvoiceService : IInvoiceService
     /// <inheritdoc/>
     public async Task<InvoiceDto> VoidInvoiceAsync(string invoiceId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(invoiceId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(invoiceId);
 
         try
         {
@@ -114,7 +115,7 @@ public class InvoiceService : IInvoiceService
     /// <inheritdoc/>
     public async Task<InvoiceDto> GetInvoiceAsync(string invoiceId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(invoiceId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(invoiceId);
 
         try
         {
@@ -131,7 +132,7 @@ public class InvoiceService : IInvoiceService
     /// <inheritdoc/>
     public async Task<IReadOnlyList<InvoiceDto>> ListInvoicesAsync(string customerId, string? status = null, int limit = 10, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(customerId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(customerId);
 
         try
         {
@@ -155,7 +156,7 @@ public class InvoiceService : IInvoiceService
     /// <inheritdoc/>
     public async Task<InvoiceDto> SendInvoiceAsync(string invoiceId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(invoiceId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(invoiceId);
 
         try
         {

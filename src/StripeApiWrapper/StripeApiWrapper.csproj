@@ -8,15 +8,23 @@
     <!-- NuGet Package Properties -->
     <PackageId>LukeWeaver.StripeApiWrapper</PackageId>
     <Version>1.0.0</Version>
-    <Description>A reusable Stripe API wrapper for .NET applications with support for payments, customers, subscriptions, invoices, and webhooks.</Description>
-    <PackageTags>stripe;payments;api;dotnet;nuget</PackageTags>
+    <Authors>Luke Weaver</Authors>
+    <Company>LukeWeaver</Company>
+    <Copyright>Copyright (c) 2026 Luke Weaver</Copyright>
+    <Description>A reusable Stripe API wrapper for .NET applications with support for payments, customers, subscriptions, invoices, and webhooks. Features include dependency injection, options pattern configuration, webhook signature verification, and comprehensive error handling.</Description>
+    <PackageTags>stripe;payments;api;dotnet;nuget;billing;subscriptions;webhooks</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/lukeweaver/stripe-api-wrapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukeweaver/stripe-api-wrapper</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>See CHANGELOG.md for release notes.</PackageReleaseNotes>
 
     <!-- Symbol Package -->
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

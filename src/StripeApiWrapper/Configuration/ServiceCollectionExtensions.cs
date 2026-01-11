@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Stripe;
+using StripeApiWrapper.Internal;
 using StripeApiWrapper.Services;
 
 namespace StripeApiWrapper.Configuration;
@@ -21,8 +22,8 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         Action<StripeOptions> configureOptions)
     {
-        ArgumentNullException.ThrowIfNull(services);
-        ArgumentNullException.ThrowIfNull(configureOptions);
+        ThrowHelper.ThrowIfNull(services);
+        ThrowHelper.ThrowIfNull(configureOptions);
 
         services.Configure(configureOptions);
 
@@ -39,8 +40,8 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        ArgumentNullException.ThrowIfNull(services);
-        ArgumentNullException.ThrowIfNull(configuration);
+        ThrowHelper.ThrowIfNull(services);
+        ThrowHelper.ThrowIfNull(configuration);
 
         services.Configure<StripeOptions>(configuration.GetSection(StripeOptions.SectionName));
 

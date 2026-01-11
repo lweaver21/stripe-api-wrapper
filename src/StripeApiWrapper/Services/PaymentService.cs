@@ -2,6 +2,7 @@ using Microsoft.Extensions.Options;
 using Stripe;
 using StripeApiWrapper.Configuration;
 using StripeApiWrapper.Exceptions;
+using StripeApiWrapper.Internal;
 using StripeApiWrapper.Models;
 
 namespace StripeApiWrapper.Services;
@@ -22,8 +23,8 @@ public class PaymentService : IPaymentService
     /// <param name="options">The Stripe options.</param>
     public PaymentService(IStripeClient stripeClient, IOptions<StripeOptions> options)
     {
-        ArgumentNullException.ThrowIfNull(stripeClient);
-        ArgumentNullException.ThrowIfNull(options);
+        ThrowHelper.ThrowIfNull(stripeClient);
+        ThrowHelper.ThrowIfNull(options);
 
         _paymentIntentService = new PaymentIntentService(stripeClient);
         _refundService = new RefundService(stripeClient);
@@ -33,7 +34,7 @@ public class PaymentService : IPaymentService
     /// <inheritdoc/>
     public async Task<PaymentResult> CreatePaymentAsync(PaymentRequest request, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(request);
+        ThrowHelper.ThrowIfNull(request);
 
         try
         {
@@ -64,7 +65,7 @@ public class PaymentService : IPaymentService
     /// <inheritdoc/>
     public async Task<PaymentResult> ConfirmPaymentAsync(string paymentIntentId, string? paymentMethodId = null, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(paymentIntentId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(paymentIntentId);
 
         try
         {
@@ -86,7 +87,7 @@ public class PaymentService : IPaymentService
     /// <inheritdoc/>
     public async Task<PaymentResult> CapturePaymentAsync(string paymentIntentId, long? amountToCapture = null, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(paymentIntentId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(paymentIntentId);
 
         try
         {
@@ -108,7 +109,7 @@ public class PaymentService : IPaymentService
     /// <inheritdoc/>
     public async Task<string> RefundPaymentAsync(string paymentIntentId, long? amount = null, string? reason = null, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(paymentIntentId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(paymentIntentId);
 
         try
         {
@@ -132,7 +133,7 @@ public class PaymentService : IPaymentService
     /// <inheritdoc/>
     public async Task<PaymentResult> CancelPaymentAsync(string paymentIntentId, string? cancellationReason = null, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(paymentIntentId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(paymentIntentId);
 
         try
         {
@@ -154,7 +155,7 @@ public class PaymentService : IPaymentService
     /// <inheritdoc/>
     public async Task<PaymentResult> GetPaymentAsync(string paymentIntentId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(paymentIntentId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(paymentIntentId);
 
         try
         {

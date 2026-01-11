@@ -2,6 +2,7 @@ using Microsoft.Extensions.Options;
 using Stripe;
 using StripeApiWrapper.Configuration;
 using StripeApiWrapper.Exceptions;
+using StripeApiWrapper.Internal;
 using StripeApiWrapper.Models;
 
 namespace StripeApiWrapper.Services;
@@ -22,8 +23,8 @@ public class CustomerService : ICustomerService
     /// <param name="options">The Stripe options.</param>
     public CustomerService(IStripeClient stripeClient, IOptions<StripeOptions> options)
     {
-        ArgumentNullException.ThrowIfNull(stripeClient);
-        ArgumentNullException.ThrowIfNull(options);
+        ThrowHelper.ThrowIfNull(stripeClient);
+        ThrowHelper.ThrowIfNull(options);
 
         _customerService = new Stripe.CustomerService(stripeClient);
         _paymentMethodService = new PaymentMethodService(stripeClient);
@@ -33,7 +34,7 @@ public class CustomerService : ICustomerService
     /// <inheritdoc/>
     public async Task<CustomerDto> CreateCustomerAsync(CustomerDto customer, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(customer);
+        ThrowHelper.ThrowIfNull(customer);
 
         try
         {
@@ -61,8 +62,8 @@ public class CustomerService : ICustomerService
     /// <inheritdoc/>
     public async Task<CustomerDto> UpdateCustomerAsync(string customerId, CustomerDto customer, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(customerId);
-        ArgumentNullException.ThrowIfNull(customer);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(customerId);
+        ThrowHelper.ThrowIfNull(customer);
 
         try
         {
@@ -90,7 +91,7 @@ public class CustomerService : ICustomerService
     /// <inheritdoc/>
     public async Task<CustomerDto> GetCustomerAsync(string customerId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(customerId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(customerId);
 
         try
         {
@@ -112,7 +113,7 @@ public class CustomerService : ICustomerService
     /// <inheritdoc/>
     public async Task<bool> DeleteCustomerAsync(string customerId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(customerId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(customerId);
 
         try
         {
@@ -128,8 +129,8 @@ public class CustomerService : ICustomerService
     /// <inheritdoc/>
     public async Task<string> AttachPaymentMethodAsync(string customerId, string paymentMethodId, bool setAsDefault = false, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(customerId);
-        ArgumentException.ThrowIfNullOrWhiteSpace(paymentMethodId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(customerId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(paymentMethodId);
 
         try
         {
@@ -164,7 +165,7 @@ public class CustomerService : ICustomerService
     /// <inheritdoc/>
     public async Task<bool> DetachPaymentMethodAsync(string paymentMethodId, CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(paymentMethodId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(paymentMethodId);
 
         try
         {
@@ -180,7 +181,7 @@ public class CustomerService : ICustomerService
     /// <inheritdoc/>
     public async Task<IReadOnlyList<string>> ListPaymentMethodsAsync(string customerId, string type = "card", CancellationToken cancellationToken = default)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(customerId);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(customerId);
 
         try
         {

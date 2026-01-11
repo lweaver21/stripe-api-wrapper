@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Stripe;
 using StripeApiWrapper.Configuration;
 using StripeApiWrapper.Exceptions;
+using StripeApiWrapper.Internal;
 
 namespace StripeApiWrapper.Webhooks;
 
@@ -27,8 +28,8 @@ public class WebhookProcessor
         IOptions<StripeOptions> options,
         ILogger<WebhookProcessor>? logger = null)
     {
-        ArgumentNullException.ThrowIfNull(serviceProvider);
-        ArgumentNullException.ThrowIfNull(options);
+        ThrowHelper.ThrowIfNull(serviceProvider);
+        ThrowHelper.ThrowIfNull(options);
 
         _serviceProvider = serviceProvider;
         _options = options.Value;
@@ -44,8 +45,8 @@ public class WebhookProcessor
     /// <exception cref="StripeApiException">Thrown when signature validation fails.</exception>
     public Event ValidateAndParseWebhook(string payload, string signature)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(payload);
-        ArgumentException.ThrowIfNullOrWhiteSpace(signature);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(payload);
+        ThrowHelper.ThrowIfNullOrWhiteSpace(signature);
 
         if (string.IsNullOrWhiteSpace(_options.WebhookSecret))
         {
@@ -91,7 +92,7 @@ public class WebhookProcessor
     /// <returns>True if the event was handled, false otherwise.</returns>
     public async Task<bool> ProcessEventAsync(Event stripeEvent, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(stripeEvent);
+        ThrowHelper.ThrowIfNull(stripeEvent);
 
         using var scope = _serviceProvider.CreateScope();
         var handlers = scope.ServiceProvider.GetServices<IWebhookHandler>();

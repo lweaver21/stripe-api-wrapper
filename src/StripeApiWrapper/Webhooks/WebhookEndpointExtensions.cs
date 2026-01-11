@@ -1,6 +1,8 @@
+#if NET10_0_OR_GREATER
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+#endif
 using Microsoft.Extensions.DependencyInjection;
 using StripeApiWrapper.Exceptions;
 
@@ -11,6 +13,7 @@ namespace StripeApiWrapper.Webhooks;
 /// </summary>
 public static class WebhookEndpointExtensions
 {
+#if NET10_0_OR_GREATER
     /// <summary>
     /// Maps a Stripe webhook endpoint.
     /// </summary>
@@ -55,6 +58,7 @@ public static class WebhookEndpointExtensions
             }
         });
     }
+#endif
 
     /// <summary>
     /// Adds Stripe webhook services to the service collection.
