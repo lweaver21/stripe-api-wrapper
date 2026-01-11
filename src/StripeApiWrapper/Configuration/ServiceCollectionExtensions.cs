@@ -69,8 +69,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPaymentService, PaymentService>();
         services.AddScoped<ICustomerService, Services.CustomerService>();
         services.AddScoped<ISubscriptionService, Services.SubscriptionService>();
-        // TODO: Register additional services in future iterations
-        // services.AddScoped<IInvoiceService, InvoiceService>();
+        services.AddScoped<IInvoiceService, Services.InvoiceService>();
 
         return services;
     }
