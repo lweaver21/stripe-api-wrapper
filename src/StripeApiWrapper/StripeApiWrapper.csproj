@@ -6,17 +6,17 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
 
     <!-- NuGet Package Properties -->
-    <PackageId>LukeWeaver.StripeApiWrapper</PackageId>
+    <PackageId>W.Core.Stripe</PackageId>
     <Version>1.0.0</Version>
     <Authors>Luke Weaver</Authors>
-    <Company>LukeWeaver</Company>
+    <Company>W</Company>
     <Copyright>Copyright (c) 2026 Luke Weaver</Copyright>
     <Description>A reusable Stripe API wrapper for .NET applications with support for payments, customers, subscriptions, invoices, and webhooks. Features include dependency injection, options pattern configuration, webhook signature verification, and comprehensive error handling.</Description>
     <PackageTags>stripe;payments;api;dotnet;nuget;billing;subscriptions;webhooks</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/lukeweaver/stripe-api-wrapper</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lukeweaver/stripe-api-wrapper</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/lweaver21/W.Core.Stripe</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lweaver21/W.Core.Stripe</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>See CHANGELOG.md for release notes.</PackageReleaseNotes>
 

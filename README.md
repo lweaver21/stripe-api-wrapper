@@ -1,7 +1,7 @@
-# StripeApiWrapper
+# W.Core.Stripe
 
-[![CI Build](https://github.com/lweaver21/stripe-api-wrapper/actions/workflows/ci.yml/badge.svg)](https://github.com/lweaver21/stripe-api-wrapper/actions/workflows/ci.yml)
-[![NuGet](https://img.shields.io/nuget/v/LukeWeaver.StripeApiWrapper.svg)](https://www.nuget.org/packages/LukeWeaver.StripeApiWrapper)
+[![CI Build](https://github.com/lweaver21/W.Core.Stripe/actions/workflows/ci.yml/badge.svg)](https://github.com/lweaver21/W.Core.Stripe/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/W.Core.Stripe.svg)](https://www.nuget.org/packages/W.Core.Stripe)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A reusable .NET library that wraps Stripe API functionality, providing a clean interface for payments, customers, subscriptions, invoices, and webhook handling.
@@ -21,13 +21,13 @@ A reusable .NET library that wraps Stripe API functionality, providing a clean i
 ## Installation
 
 ```bash
-dotnet add package LukeWeaver.StripeApiWrapper
+dotnet add package W.Core.Stripe
 ```
 
 Or via Package Manager:
 
 ```powershell
-Install-Package LukeWeaver.StripeApiWrapper
+Install-Package W.Core.Stripe
 ```
 
 ## Quick Start
@@ -457,8 +457,8 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## Support
 
-- [GitHub Issues](https://github.com/lweaver21/stripe-api-wrapper/issues)
-- [NuGet Package](https://www.nuget.org/packages/LukeWeaver.StripeApiWrapper)
+- [GitHub Issues](https://github.com/lweaver21/W.Core.Stripe/issues)
+- [NuGet Package](https://www.nuget.org/packages/W.Core.Stripe)
 
 ---
 
